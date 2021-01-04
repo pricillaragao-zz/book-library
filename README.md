@@ -4,9 +4,9 @@ A book library application.
 
 ## Funcionalidades:
 - Emprestar livros; 
-- Comprar livros novos; 
-- Doar livros; 
+- Receber devolução de livros;
 - Fazer carteirinha; 
+- Comprar livros novos; 
 
 
 
