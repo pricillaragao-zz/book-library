@@ -1,15 +1,10 @@
-# Library 
+# Library
 
-A book library application. 
+A book library application.
 
 ## Funcionalidades:
-- Emprestar livros; 
+
+- Emprestar livros;
 - Receber devolução de livros;
-- Fazer carteirinha; 
-- Comprar livros novos; 
-
-
-
-
-
-
+- Fazer carteirinha;
+- Comprar livros novos;

@@ -1,3 +1,3 @@
 class Book {
-  constructor(id, title)
+  constructor(id, title) {}
 }

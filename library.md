@@ -1,19 +1,17 @@
 Emprestar livros:
 
-Visualizar acervo; 
-Escolher livro; 
+Visualizar acervo;
+Escolher livro;
 Inserir número da carteirinha; (argumento para retirar o livro)
-Retirar livro; 
-
+Retirar livro;
 
 Receber devolução de livros:
 
 Inserir número da carteirinha;
 Selecionar livro a ser devolvido;
-Devolver livro; 
-
+Devolver livro;
 
 Fazer carteirinha:
 
-Inserir nome completo; 
-Inserir endereço;  
+Inserir nome completo;
+Inserir endereço;

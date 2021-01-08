@@ -1,18 +1,9 @@
 class BooksService {
-  
-  listBooks() { 
-  }
+  listBooks() {}
 
-  rentBook(userId, bookId) {
-  }
+  rentBook(userId, bookId) {}
 
-  returnBook(bookId) {
+  returnBook(bookId) {}
 
-  }
-
-  createBook(title) {
-    
-  }
-
+  createBook(title) {}
 }
-
