@@ -33,15 +33,29 @@ class UsersService {
    * @param {String} id
    * @returns {User}
    */
-  getUser(id) {
-    const user = this.users.find((user) => {
-      return user.id === id;
-    });
-    return user;
+  async getUser(id) {
+    return await this.usersRepository.getUser(id);
   }
 
+  /**
+   * @returns {[User]}
+   */
   async listUsers() {
     return await this.usersRepository.listUsers();
+  }
+
+  /**
+   *
+   * @param {User} user
+   * @returns {User}
+   */
+  async updateUser(user) {
+    await this.usersRepository.updateUser(user);
+    return this.getUser(user.id);
+  }
+
+  async deleteUser(id) {
+    await this.usersRepository.deleteUser(id);
   }
 }
 

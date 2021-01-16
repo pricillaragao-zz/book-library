@@ -21,6 +21,7 @@
   "homepage": "https://github.com/pricillaragao/book-library#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "knex": "^0.21.15",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

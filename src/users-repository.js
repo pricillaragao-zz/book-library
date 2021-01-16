@@ -1,53 +1,62 @@
 const path = require("path");
-const fs = require("fs");
-const {Pool} = require("pg")
-const readLine = require("readline");
+const Knex = require("knex");
 const User = require("./user");
 
 class UsersRepository {
   /**
-   * 
-   * @param {Pool} pool 
+   *
+   * @param {Knex} knex
    */
-  constructor(pool) {
-    this.filepath = path.join(__dirname, "users.csv");
-    this.pool = pool
-    this.table = "users"
+  constructor(knex) {
+    this.knex = knex;
+    this.table = "users";
   }
   /**
    *
    * @param {User} user
    */
   async insertUser(user) {
-    try {
-      await this.pool.query(`insert into ${this.table} (id, name) values ($1::uuid, $2::text)`, [user.id, user.name])     
-    } catch (err) {
-      throw err
-    }
+    const query = `insert into ${this.table} (id, name) values (:id, :name);`;
+    await this.knex.raw(query, {
+      id: user.id,
+      name: user.name,
+    });
   }
 
   /**
    * @return {[User]} list of all users
    */
   async listUsers() {
-    // https://nodejs.org/api/readline.html#readline_example_read_file_stream_line_by_line
-    const fileStream = fs.createReadStream(this.filepath);
+    const query = `select * from ${this.table};`;
 
-    const rl = readLine.createInterface({
-      input: fileStream,
-      crlfDelay: Infinity,
+    const result = await this.knex.raw(query);
+
+    return result.rows.map((row) => {
+      return new User(row.id, row.name);
     });
+  }
 
-    const users = [];
+  async getUser(id) {
+    const query = `select * from ${this.table} where id = :id;`;
+    const result = await this.knex.raw(query, {
+      id,
+    });
+    const row = result.rows[0];
+    return new User(row.id, row.name);
+  }
 
-    for await (const line of rl) {
-      const [id, name, address] = line.split(",");
+  /**
+   *
+   * @param {User} user
+   */
+  async updateUser(user) {
+    await this.knex(this.table).where("id", "=", user.id).update({
+      name: user.name,
+    });
+  }
 
-      const user = new User(id, name, address);
-
-      users.push(user);
-    }
-    return users;
+  async deleteUser(id) {
+    await this.knex(this.table).where("id", "=", id).delete();
   }
 }
 
