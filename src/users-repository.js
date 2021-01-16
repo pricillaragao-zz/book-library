@@ -1,23 +1,29 @@
 const path = require("path");
 const fs = require("fs");
+const {Pool} = require("pg")
 const readLine = require("readline");
 const User = require("./user");
 
 class UsersRepository {
-  constructor() {
+  /**
+   * 
+   * @param {Pool} pool 
+   */
+  constructor(pool) {
     this.filepath = path.join(__dirname, "users.csv");
+    this.pool = pool
+    this.table = "users"
   }
   /**
    *
    * @param {User} user
    */
   async insertUser(user) {
-    const data = `\n${user.id}, ${user.name}, ${user.address}`;
-    await fs.appendFile(this.filepath, data, (error) => {
-      if (error) {
-        throw error;
-      }
-    });
+    try {
+      await this.pool.query(`insert into ${this.table} (id, name) values ($1::uuid, $2::text)`, [user.id, user.name])     
+    } catch (err) {
+      throw err
+    }
   }
 
   /**
