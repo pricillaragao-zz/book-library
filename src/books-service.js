@@ -11,7 +11,6 @@ class BooksService {
     this.books = [];
     this.booksRepository = booksRepository;
   }
-
   /**
    *
    * @param {String} id
@@ -29,17 +28,32 @@ class BooksService {
 
   /**
    *
-   * @param {Number} id
+   * @param {String} id
    * @return {Book}
    */
-  getBook(id) {
-    const book = this.book.find((book) => {
-      return book.id === id;
-    });
-    return book;
+  async getBook(id) {
+    return await this.booksRepository.getBook(id);
   }
+
+  /**
+   * @returns {[Book]}
+   */
   async listBooks() {
     return await this.booksRepository.listBooks();
+  }
+
+  /**
+   *
+   * @param {Book} book
+   * @returns {Book}
+   */
+  async updateBook(book) {
+    await this.booksRepository.updateBook(book);
+    return this.getBook(book.id);
+  }
+
+  async deleteBook(id) {
+    await this.booksRepository.deleteBook(id);
   }
 }
 

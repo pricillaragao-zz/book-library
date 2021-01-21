@@ -1,12 +1,15 @@
-const { fstat } = require("fs");
 const path = require("path");
-const readLine = require("readline");
-const fs = require("fs");
+const Knex = require("knex");
 const Book = require("./book");
 
 class BooksRepository {
-  constructor() {
-    this.filepath = path.join(__dirname, "books.csv");
+  /**
+   *
+   * @param {Knex} knex
+   */
+  constructor(knex) {
+    this.knex = knex;
+    this.table = "books";
   }
 
   /**
@@ -14,33 +17,47 @@ class BooksRepository {
    * @param {Book} book
    */
   async insertBook(book) {
-    const data = `\n${book.id},${book.title}`;
-    await fs.appendFile(this.filepath, data, (error) => {
-      if (error) {
-        throw error;
-      }
+    const query = `insert into ${this.table} (id, title) values (:id, :title)`;
+    await this.knex.raw(query, {
+      id: book.id,
+      title: book.title,
     });
   }
 
+  /**
+   * @return {[Book]} list of all books
+   */
   async listBooks() {
-    const fileStream = fs.createReadStream(this.filepath);
+    const query = `select * from ${this.table};`;
 
-    const rl = readLine.createInterface({
-      // read line by line
-      input: fileStream,
-      crlfDelay: Infinity,
+    const result = await this.knex.raw(query);
+
+    return result.rows.map((row) => {
+      return new Book(row.id, row.title);
     });
+  }
 
-    const books = [];
+  async getBook(id) {
+    const query = `select * from ${this.table} where id = :id`;
+    const result = await this.knex.raw(query, {
+      id,
+    });
+    const row = result.rows[0];
+    return new Book(row.id, row.title);
+  }
 
-    for await (const line of rl) {
-      const [id, title] = line.split(","); // separar o conteúdo por vírgula
+  /**
+   *
+   * @param {Book} book
+   */
+  async updateBook(book) {
+    await this.knex(this.table).where("id", "=", book.id).update({
+      title: book.title,
+    });
+  }
 
-      const book = new Book(id, title);
-
-      books.push(book); // adicionar livro, equivalente ao append no python
-    }
-    return books; // retorna lista de livros
+  async deleteBook(id) {
+    await this.knex(this.table).where("id", "=", id).delete();
   }
 }
 
