@@ -7,6 +7,7 @@ const UsersController = require("./users/users-controller");
 const Book = require("./books/book");
 const BooksService = require("./books/books-service");
 const BooksRepository = require("./books/books-repository");
+const BooksController = require("./books/books-controller");
 
 const app = express();
 
@@ -63,64 +64,17 @@ app.patch("/users/:id", usersController.updateUser.bind(usersController));
 
 app.delete("/users/:id", usersController.deleteUser.bind(usersController));
 
-app.get("/books/:id", async (req, res) => {
-  try {
-    const id = req["params"]["id"];
-    res.json(await booksService.getBook(id));
-  } catch (err) {
-    console.error(err);
-    res.json({
-      error: "An error has ocurred",
-    });
-  }
-});
+const booksController = new BooksController(booksService);
 
-app.delete("/books/:id", async (req, res) => {
-  try {
-    const id = req["params"]["id"];
-    console.log("Id:", id);
-    await booksService.deleteBook(id);
-    res.statusCode = 204;
-    res.json();
-  } catch (err) {
-    console.error(err);
-    res.json({
-      error: "An error has ocurred",
-    });
-  }
-});
+app.post("/books", booksController.createBook.bind(booksController));
 
-app.patch("/books/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const title = req.body.title;
-    let book = new Book(id, title);
-    book = await booksService.updateBook(book);
-    res.json(book);
-  } catch (err) {
-    console.error(err);
-    res.json({
-      error: "An error has ocurred",
-    });
-  }
-});
+app.get("/books", booksController.listBooks.bind(booksController));
 
-app.post("/books", async (req, res) => {
-  try {
-    const book = await booksService.createBook(
-      req["body"]["title"] // usar o postman - body - raw
-    );
-    res.json(book);
-  } catch (error) {
-    console.error(error);
-    res.status = 500;
-    res.json({ error: "An error has occurred" });
-  }
-});
+app.get("/books/:id", booksController.getBook.bind(booksController));
 
-app.get("/books", async (req, res) => {
-  res.json(await booksService.listBooks());
-});
+app.patch("/books/:id", booksController.updateBook.bind(booksController));
+
+app.delete("/books/:id", booksController.deleteBook.bind(booksController));
 
 app.use((error, req, res, next) => {
   console.error(error);
