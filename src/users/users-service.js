@@ -8,7 +8,6 @@ class UsersService {
    * @param {UsersRepository} usersRepository
    */
   constructor(usersRepository) {
-    this.users = [];
     this.usersRepository = usersRepository;
   }
   /**

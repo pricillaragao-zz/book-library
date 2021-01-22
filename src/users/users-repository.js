@@ -1,10 +1,8 @@
-const path = require("path");
 const Knex = require("knex");
 const User = require("./user");
 
 class UsersRepository {
   /**
-   *
    * @param {Knex} knex
    */
   constructor(knex) {
@@ -12,7 +10,6 @@ class UsersRepository {
     this.table = "users";
   }
   /**
-   *
    * @param {User} user
    */
   async insertUser(user) {
@@ -41,12 +38,12 @@ class UsersRepository {
     const result = await this.knex.raw(query, {
       id,
     });
+    console.log("result", id);
     const row = result.rows[0];
     return new User(row.id, row.name);
   }
 
   /**
-   *
    * @param {User} user
    */
   async updateUser(user) {

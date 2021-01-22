@@ -1,6 +1,5 @@
 class Book {
   /**
-   *
    * @param {String} id
    * @param {String} title
    */

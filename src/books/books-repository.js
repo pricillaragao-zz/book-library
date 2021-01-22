@@ -1,10 +1,8 @@
-const path = require("path");
 const Knex = require("knex");
 const Book = require("./book");
 
 class BooksRepository {
   /**
-   *
    * @param {Knex} knex
    */
   constructor(knex) {
@@ -13,7 +11,6 @@ class BooksRepository {
   }
 
   /**
-   *
    * @param {Book} book
    */
   async insertBook(book) {
@@ -47,7 +44,6 @@ class BooksRepository {
   }
 
   /**
-   *
    * @param {Book} book
    */
   async updateBook(book) {

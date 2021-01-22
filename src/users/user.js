@@ -1,6 +1,5 @@
 class User {
   /**
-   *
    * @param {String} id
    * @param {String} name
    * @param {String} address
