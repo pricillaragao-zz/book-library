@@ -83,6 +83,18 @@ app.get("/users/:id", async (req, res) => {
   }
 });
 
+app.get("/books/:id", async (req, res) => {
+  try {
+    const id = req["params"]["id"];
+    res.json(await booksService.getBook(id));
+  } catch (err) {
+    console.error(err);
+    res.json({
+      error: "An error has ocurred",
+    });
+  }
+});
+
 app.delete("/users/:id", async (req, res) => {
   try {
     const id = req["params"]["id"];
