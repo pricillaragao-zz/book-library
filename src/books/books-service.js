@@ -15,13 +15,14 @@ class BooksService {
    *
    * @param {String} id
    * @param {String} title
+   * @param {URL} coverUrl
    * @returns {Book}
    */
-  async createBook(title) {
+  async createBook(title, coverUrl) {
     if (!title) {
       throw new Error("title is required");
     }
-    const book = new Book(uuidv4(), title);
+    const book = new Book(uuidv4(), title, coverUrl);
     await this.booksRepository.insertBook(book);
     return book;
   }
@@ -48,8 +49,7 @@ class BooksService {
    * @returns {Book}
    */
   async updateBook(book) {
-    await this.booksRepository.updateBook(book);
-    return this.getBook(book.id);
+    return await this.booksRepository.updateBook(book);
   }
 
   async deleteBook(id) {

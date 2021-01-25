@@ -30,12 +30,12 @@ const knex = require("knex")({
 });
 
 const usersRepository = new UsersRepository(knex);
-
 const usersService = new UsersService(usersRepository);
+const usersController = new UsersController(usersService);
 
 const booksRepository = new BooksRepository(knex);
-
 const booksService = new BooksService(booksRepository);
+const booksController = new BooksController(booksService);
 
 // app.get("/:id", async (req, res) => {
 //   try {
@@ -52,7 +52,6 @@ const booksService = new BooksService(booksRepository);
 //   }
 // });
 
-const usersController = new UsersController(usersService);
 
 app.post("/users", usersController.createUser.bind(usersController));
 
@@ -64,7 +63,6 @@ app.patch("/users/:id", usersController.updateUser.bind(usersController));
 
 app.delete("/users/:id", usersController.deleteUser.bind(usersController));
 
-const booksController = new BooksController(booksService);
 
 app.post("/books", booksController.createBook.bind(booksController));
 

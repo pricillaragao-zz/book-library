@@ -1,4 +1,5 @@
 const Knex = require("knex");
+const User = require("../users/user");
 const Book = require("./book");
 
 class BooksRepository {
@@ -14,10 +15,11 @@ class BooksRepository {
    * @param {Book} book
    */
   async insertBook(book) {
-    const query = `insert into ${this.table} (id, title) values (:id, :title)`;
+    const query = `insert into ${this.table} (id, title, cover_url) values (:id, :title, :coverUrl)`;
     await this.knex.raw(query, {
       id: book.id,
       title: book.title,
+      coverUrl: book.coverUrl
     });
   }
 
@@ -30,7 +32,7 @@ class BooksRepository {
     const result = await this.knex.raw(query);
 
     return result.rows.map((row) => {
-      return new Book(row.id, row.title);
+      return new Book(row.id, row.title, row.cover_url);
     });
   }
 
@@ -40,16 +42,22 @@ class BooksRepository {
       id,
     });
     const row = result.rows[0];
-    return new Book(row.id, row.title);
+    return new Book(row.id, row.title, row.coverUrl);
   }
 
   /**
    * @param {Book} book
+   * @returns {Book} updated book
    */
   async updateBook(book) {
-    await this.knex(this.table).where("id", "=", book.id).update({
+    const result = await this.knex(this.table).where("id", "=", book.id).update({
       title: book.title,
-    });
+      cover_url: book.coverUrl
+    }).returning('*');
+
+    const row = result[0];
+
+    return new Book(row.id, row.title, row.cover_url);
   }
 
   async deleteBook(id) {

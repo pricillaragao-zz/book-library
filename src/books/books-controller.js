@@ -10,7 +10,8 @@ class BooksController {
   async createBook(req, res, next) {
     try {
       const book = await this.booksService.createBook(
-        req["body"]["title"] // usar o postman - body - raw
+        req["body"]["title"], // usar o postman - body - raw
+        req["body"]["coverUrl"]
       );
       res.json(book);
     } catch (error) {
@@ -39,7 +40,8 @@ class BooksController {
     try {
       const id = req.params.id;
       const title = req.body.title;
-      let book = new Book(id, title);
+      const coverUrl = req.body.coverUrl;
+      let book = new Book(id, title, coverUrl);
       book = await this.booksService.updateBook(book);
       res.json(book);
     } catch (error) {
