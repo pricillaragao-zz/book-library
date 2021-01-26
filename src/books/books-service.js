@@ -1,71 +1,57 @@
 const { v4: uuidv4 } = require("uuid");
 const Book = require("./book");
-const BooksRepository = require("./books-repository");
+const booksRepository = require("./books-repository");
 
-class BooksService {
-  /**
-   *
-   * @param {BooksRepository} booksRepository
-   */
-  constructor(booksRepository) {
-    this.books = [];
-    this.booksRepository = booksRepository;
+/**
+ * @param {String} id
+ * @param {String} title
+ * @param {URL} coverUrl
+ * @returns {Book}
+ */
+const createBook = async (title, coverUrl) => {
+  if (!title) {
+    throw new Error("title is required");
   }
-  /**
-   *
-   * @param {String} id
-   * @param {String} title
-   * @param {URL} coverUrl
-   * @returns {Book}
-   */
-  async createBook(title, coverUrl) {
-    if (!title) {
-      throw new Error("title is required");
-    }
-    const book = new Book(uuidv4(), title, coverUrl);
-    await this.booksRepository.insertBook(book);
-    return book;
-  }
+  const book = new Book(uuidv4(), title, coverUrl);
+  await booksRepository.insertBook(book);
+  return book;
+};
 
-  /**
-   *
-   * @param {String} id
-   * @return {Book}
-   */
-  async getBook(id) {
-    return await this.booksRepository.getBook(id);
-  }
+/**
+ * @param {String} id
+ * @return {Book}
+ */
+const getBook = async (id) => {
+  return await booksRepository.getBook(id);
+};
 
-  /**
-   * @returns {[Book]}
-   */
-  async listBooks() {
-    return await this.booksRepository.listBooks();
-  }
+/**
+ * @returns {[Book]}
+ */
+const listBooks = async () => {
+  return await booksRepository.listBooks();
+};
 
-  /**
-   *
-   * @param {Book} book
-   * @returns {Book}
-   */
-  async updateBook(book) {
-    return await this.booksRepository.updateBook(book);
-  }
+/**
+ *
+ * @param {Book} book
+ * @returns {Book} the updated book
+ */
+const updateBook = async (book) => {
+  return await booksRepository.updateBook(book);
+};
 
-  async deleteBook(id) {
-    await this.booksRepository.deleteBook(id);
-  }
-}
+/**
+ * @param {String} id
+ */
+const deleteBook = async (id) => {
+  await booksRepository.deleteBook(id);
+};
 
-module.exports = BooksService;
-
-// rentBook(userId, bookId) {}
-
-// returnBook(bookId) {}
-
-// createBook(title) {}
-
-// listBooks() {
-//   const book = new Book(6, "ABC");
-//   return [book];
-// }
+module.exports = {
+  createBook,
+  getBook,
+  listBooks,
+  updateBook,
+  deleteBook,
+};
