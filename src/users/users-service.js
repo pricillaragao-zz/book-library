@@ -1,61 +1,58 @@
 const { v4: uuidv4 } = require("uuid");
 const User = require("./user");
-const UsersRepository = require("./users-repository");
+const usersRepository = require("./users-repository");
 
-class UsersService {
-  /**
-   *
-   * @param {UsersRepository} usersRepository
-   */
-  constructor(usersRepository) {
-    this.usersRepository = usersRepository;
+/**
+ * @param {String} id
+ * @param {String} name
+ * @param {Strind} address
+ * @returns {User}
+ */
+createUser = async (name, address) => {
+  if (!name) {
+    throw new Error("name is required");
   }
-  /**
-   *
-   * @param {String} name
-   * @param {String} address
-   * @returns {User}
-   */
-  async createUser(name, address) {
-    if (!name) {
-      throw new Error("name is required");
-    }
-    if (!address) {
-      throw new Error("address is required");
-    }
-    const user = new User(uuidv4(), name, address);
-    await this.usersRepository.insertUser(user);
-    return user;
+  if (!address) {
+    throw new Error("address is required");
   }
-  /**
-   *
-   * @param {String} id
-   * @returns {User}
-   */
-  async getUser(id) {
-    return await this.usersRepository.getUser(id);
-  }
+  const user = new User(uuidv4(), name, address);
+  await usersRepository.insertUser(user);
+  return user;
+};
+/**
+ *
+ * @param {String} id
+ * @returns {User}
+ */
+getUser = async (id) => {
+  return await usersRepository.getUser(id);
+};
 
-  /**
-   * @returns {[User]}
-   */
-  async listUsers() {
-    return await this.usersRepository.listUsers();
-  }
+/**
+ * @returns {[User]}
+ */
+listUsers = async () => {
+  return await usersRepository.listUsers();
+};
 
-  /**
-   *
-   * @param {User} user
-   * @returns {User}
-   */
-  async updateUser(user) {
-    await this.usersRepository.updateUser(user);
-    return this.getUser(user.id);
-  }
+/**
+ *
+ * @param {User} user
+ * @returns {User}
+ */
+updateUser = async (user) => {
+  await usersRepository.updateUser(user);
+  return getUser(user.id);
+};
 
-  async deleteUser(id) {
-    await this.usersRepository.deleteUser(id);
-  }
-}
+deleteUser = async (id) => {
+  await usersRepository.deleteUser(id);
+};
 
-module.exports = UsersService;
+module.exports = {
+  createUser,
+  getUser,
+  listUsers,
+  updateUser,
+  deleteUser,
+};

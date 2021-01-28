@@ -1,60 +1,69 @@
 const Knex = require("knex");
+const db = require("../db");
 const User = require("./user");
 
-class UsersRepository {
-  /**
-   * @param {Knex} knex
-   */
-  constructor(knex) {
-    this.knex = knex;
-    this.table = "users";
-  }
-  /**
-   * @param {User} user
-   */
-  async insertUser(user) {
-    const query = `insert into ${this.table} (id, name) values (:id, :name);`;
-    await this.knex.raw(query, {
-      id: user.id,
-      name: user.name,
-    });
-  }
+const table = "users";
 
-  /**
-   * @return {[User]} list of all users
-   */
-  async listUsers() {
-    const query = `select * from ${this.table};`;
+/**
+ * @param {User} user
+ */
+const insertUser = async (user) => {
+  const query = `insert into ${table} (id, name) values (:id, :name);`;
+  await db.raw(query, {
+    id: user.id,
+    name: user.name,
+  });
+};
 
-    const result = await this.knex.raw(query);
+/**
+ * @return {[User]} list of all users
+ */
+const listUsers = async () => {
+  const query = `select * from ${table};`;
 
-    return result.rows.map((row) => {
-      return new User(row.id, row.name);
-    });
-  }
+  const result = await db.raw(query);
 
-  async getUser(id) {
-    const query = `select * from ${this.table} where id = :id;`;
-    const result = await this.knex.raw(query, {
-      id,
-    });
-    console.log("result", id);
-    const row = result.rows[0];
+  return result.rows.map((row) => {
     return new User(row.id, row.name);
-  }
+  });
+};
 
-  /**
-   * @param {User} user
-   */
-  async updateUser(user) {
-    await this.knex(this.table).where("id", "=", user.id).update({
+const getUser = async (id) => {
+  const query = `select * from ${table} where id = :id;`;
+  const result = await db.raw(query, {
+    id,
+  });
+  console.log("result", id);
+  const row = result.rows[0];
+  return new User(row.id, row.name);
+};
+
+/**
+ * @param {User} user
+ * @returns {User} updated user
+ */
+const updateUser = async (user) => {
+  const result = await db(table)
+    .where("id", "=", user.id)
+    .update({
       name: user.name,
-    });
-  }
+      address: user.address,
+    })
+    .returning("*");
 
-  async deleteUser(id) {
-    await this.knex(this.table).where("id", "=", id).delete();
-  }
-}
+  const row = result[0];
 
-module.exports = UsersRepository;
+  return new User(row.id, row.name, row.address);
+};
+
+const deleteUser = async (id) => {
+  await db(table).where("id", "=", id).delete();
+};
+
+module.exports = {
+  insertUser,
+  listUsers,
+  getUser,
+  updateUser,
+  deleteUser,
+};
