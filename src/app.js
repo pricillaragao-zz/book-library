@@ -1,8 +1,8 @@
 const express = require("express");
 const nunjucks = require("nunjucks");
 const path = require("path");
-const booksRouter = require("./books/books-router");
-const usersRouter = require("./users/users-router");
+const booksRouter = require("./books/books-router-api");
+const usersRouter = require("./users/users-router-api");
 
 const app = express();
 
@@ -13,9 +13,9 @@ nunjucks.configure(path.join(__dirname, "views"), {
 
 app.use(express.json());
 
-app.use("/books", booksRouter);
+app.use("/api/v1/books", booksRouter);
 
-app.use("/users", usersRouter);
+app.use("/api/v1/users", usersRouter);
 
 app.use((error, req, res, next) => {
   console.error(error);
