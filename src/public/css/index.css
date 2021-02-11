@@ -1,6 +1,37 @@
-.header {
+:root {
+  --color-background: #fafafafa;
+  --color-background-accent: #303030;
+  --color-primary: #d1b5d0;
+  --color-primary-dark: #9371be;
+  --color-text-primary: rgba(0, 0, 0, 0.87);
+}
+
+/* Colors */
+
+.color-background-accent {
+  background-color: var(--color-background-accent);
+}
+
+.color-background {
+  background-color: var(--color-background);
+}
+
+.color-primary {
+  color: var(--color-primary);
+}
+
+.color-primary-dark {
+  color: var(--color-primary-dark);
+}
+
+.color-text-primary {
+  color: var(--color-text-primary);
+}
+
+/* Overflow */
+
+.overflow-hidden {
   overflow: hidden;
-  background-color: #333;
 }
 
 .header__item {
@@ -17,7 +48,7 @@
   font-family: "Yusei Magic", sans-serif;
 }
 .title__bigger {
-  color: #9371be;
+  color: 
 }
 
 .title__smaller {
