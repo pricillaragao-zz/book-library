@@ -1,5 +1,7 @@
-<nav class="color-background-accent overflow-hidden">
-    <a class="header__item" href="/">Home</a>
-    <a class="header__item" href="/books/rent">Books</a>
-    <a class="header__item" href="/exemplo">Contact</a>
+{% import "nav-link.html" as navLink %}
+
+<nav class="color-background-accent flex gap-medium items-center h3">
+    {{ navLink.navLink('/', 'Home') }}
+    {{ navLink.navLink('/books/rent', 'Books')}}
+    {{ navLink.navLink('/exemplo', 'Contact')}}
 </nav>

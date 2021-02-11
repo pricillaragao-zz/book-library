@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/rent", async (req, res, next) => {
   try {
     const books = await booksService.listBooks();
-    res.render("books/rent.html", {
+    res.render("books.html", {
       lang: "en",
       title: "Pricilla's Library - Rent a Book",
       books,
