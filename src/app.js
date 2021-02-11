@@ -1,21 +1,34 @@
 const express = require("express");
 const nunjucks = require("nunjucks");
 const path = require("path");
-const booksRouter = require("./books/books-router-api");
-const usersRouter = require("./users/users-router-api");
+const booksRouterAPI = require("./books/books-router-api");
+const usersRouterAPI = require("./users/users-router-api");
+const booksRouter = require("./books/books-router");
 
 const app = express();
+
+app.use(express.json());
+
+app.use("/api/v1/books", booksRouterAPI);
+
+app.use("/api/v1/users", usersRouterAPI);
+
+app.use(express.static(__dirname + "/public"));
 
 nunjucks.configure(path.join(__dirname, "views"), {
   autoescape: true,
   express: app,
 });
 
-app.use(express.json());
+app.use("/books", booksRouter);
 
-app.use("/api/v1/books", booksRouter);
+app.get("/", (req, res) => {
+  res.render("index.html", { lang: "en", title: "Pricilla's Library - Home" });
+});
 
-app.use("/api/v1/users", usersRouter);
+app.get("/exemplo", (req, res) => {
+  res.render("exemplo.html");
+});
 
 app.use((error, req, res, next) => {
   console.error(error);

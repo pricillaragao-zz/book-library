@@ -1,0 +1,19 @@
+{% extends "layout.html" %} {% block content %}
+
+<h2 class="title title__bigger">My Favorite Books</h2>
+{% for book in books %}
+<div>
+  <img class="img__center" src="{{ book.coverUrl }}" /> <br />
+  <a
+    class="title title__smaller title__books"
+    target="_blank"
+    href="{{
+    book.bookUrl
+    }}"
+    >{{ book.title }}</a
+  >
+  <p class="text" href="{{ book.review }}">{{ book.review }}</p>
+  <br />
+</div>
+
+{% endfor %} {% endblock %}

@@ -30,7 +30,9 @@ router.post(
 
       const book = await booksService.createBook(
         req.body.title,
-        req.body.coverUrl
+        req.body.coverUrl,
+        req.body.bookUrl,
+        req.body.review
       );
       res.json(book);
     } catch (error) {
@@ -61,7 +63,9 @@ router.patch("/:id", async (req, res, next) => {
     const id = req.params.id;
     const title = req.body.title;
     const coverUrl = req.body.coverUrl;
-    let book = new Book(id, title, coverUrl);
+    const bookUrl = req.body.bookUrl;
+    const review = req.body.review;
+    let book = new Book(id, title, coverUrl, bookUrl, review);
     book = await booksService.updateBook(book);
     res.json(book);
   } catch (error) {

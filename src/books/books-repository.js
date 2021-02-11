@@ -8,11 +8,13 @@ const table = "books";
  * @param {Book} book
  */
 const insertBook = async (book) => {
-  const query = `insert into ${table} (id, title, cover_url) values (:id, :title, :coverUrl)`;
+  const query = `insert into ${table} (id, title, cover_url, book_url, review) values (:id, :title, :coverUrl, :bookUrl, :review)`;
   await db.raw(query, {
     id: book.id,
     title: book.title,
     coverUrl: book.coverUrl,
+    bookUrl: book.bookUrl,
+    review: book.review,
   });
 };
 
@@ -25,7 +27,7 @@ const listBooks = async () => {
   const result = await db.raw(query);
 
   return result.rows.map((row) => {
-    return new Book(row.id, row.title, row.cover_url);
+    return new Book(row.id, row.title, row.cover_url, row.book_url, row.review);
   });
 };
 
@@ -39,7 +41,7 @@ const getBook = async (id) => {
     id,
   });
   const row = result.rows[0];
-  return new Book(row.id, row.title, row.coverUrl);
+  return new Book(row.id, row.title, row.coverUrl, row.bookUrl, row.review);
 };
 
 /**
@@ -52,12 +54,14 @@ const updateBook = async (book) => {
     .update({
       title: book.title,
       cover_url: book.coverUrl,
+      book_url: book.bookUrl,
+      review: book.review,
     })
     .returning("*");
 
   const row = result[0];
 
-  return new Book(row.id, row.title, row.cover_url);
+  return new Book(row.id, row.title, row.cover_url, row.book_url, book.review);
 };
 
 /**

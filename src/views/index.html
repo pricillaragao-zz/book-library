@@ -1,18 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{name}}</title>
-  </head>
-  <body>
-    <h1>Hello, {{name}}!</h1>
-    <img />
+{% extends "layout.html" %} {% block content %}
 
-    <script>
-      const imgEl = document.querySelector("img");
-      imgEl.src =
-        "https://images.unsplash.com/photo-1610491951146-152ede0da2ee?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80";
-    </script>
-  </body>
-</html>
+<h2 class="title title__bigger">Welcome to my Library!</h2>
+
+<div>
+  <h3 class="title title__smaller">What will you find here?</h3>
+
+  <p class="text">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor dolor
+    vel sem finibus lobortis. Curabitur gravida, purus sed suscipit viverra, est
+    tortor pellentesque lacus, id consequat lectus nisi ac purus. Donec a orci a
+    leo pharetra viverra. Phasellus interdum ullamcorper quam, vel sodales lacus
+    hendrerit vel. In vulputate arcu sem. Quisque porta augue vitae tellus
+    sollicitudin vehicula nec at ante. Proin vulputate, quam nec ultricies
+    pellentesque, massa magna molestie sapien, et sodales metus mi nec eros.
+    Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+    ac turpis egestas.
+  </p>
+
+  <h3 class="title title__smaller">Who am I?</h3>
+
+  <p class="text">
+    Nunc vitae semper quam. Aliquam ac tempus enim, sed pulvinar lacus. Mauris
+    orci justo, vehicula quis leo eget, venenatis dapibus arcu. Nulla ornare
+    tellus justo, eget pulvinar purus sagittis sit amet. Cras felis libero,
+    tincidunt vel consectetur nec, iaculis et dui. Sed finibus nisi ligula, ac
+    efficitur enim egestas et. Phasellus at mi molestie, pellentesque ipsum id,
+    consectetur ex. Integer pretium, libero eget tincidunt tempor, lacus urna
+    vulputate ante, at molestie ante nibh sed elit. Ut eu molestie nisi. Mauris
+    mattis turpis nisi, id malesuada ante scelerisque id. Integer dictum
+    facilisis ligula sed commodo. Fusce mauris libero, hendrerit in commodo vel,
+    sollicitudin eget tellus. Cras felis lorem, maximus consequat vehicula at,
+    viverra ac odio. Nulla quis orci egestas, iaculis nisi et, condimentum
+    metus. Nam eu tellus id lacus eleifend lobortis id eget dolor. Vestibulum in
+    purus pharetra, commodo lectus fringilla, pulvinar tortor.
+  </p>
+</div>
+
+{% endblock %}

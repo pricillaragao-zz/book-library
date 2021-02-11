@@ -6,13 +6,15 @@ const booksRepository = require("./books-repository");
  * @param {String} id
  * @param {String} title
  * @param {URL} coverUrl
+ * @param {URL} bookUrl
+ * @param {String} review
  * @returns {Book}
  */
-const createBook = async (title, coverUrl) => {
+const createBook = async (title, coverUrl, bookUrl, review) => {
   if (!title) {
     throw new Error("title is required");
   }
-  const book = new Book(uuidv4(), title, coverUrl);
+  const book = new Book(uuidv4(), title, coverUrl, bookUrl, review);
   await booksRepository.insertBook(book);
   return book;
 };

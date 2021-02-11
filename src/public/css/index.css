@@ -1,0 +1,56 @@
+.header {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.header__item {
+  float: left;
+  padding: 20px 8px;
+  text-decoration: none;
+  font-size: 20px;
+  text-align: center;
+  font-family: "Yusei Magic", sans-serif;
+  color: #d1b5d0;
+}
+
+.title {
+  font-family: "Yusei Magic", sans-serif;
+}
+.title__bigger {
+  color: #9371be;
+}
+
+.title__smaller {
+  color: #d1b5d0;
+}
+
+.title__books {
+  text-align: center;
+}
+
+.text {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.img__center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  /* width: 10; 
+  height: 15; */
+}
+
+/* 
+#7d5fa2 roxo
+#c167a1 pink 
+#f5788f rosa claro 
+#ff9a77 laranja
+#ffc765 laranja claro ou amarelo escuro 
+#f9f871 amarelo  */
+
+/* .pd-1 {
+  padding-right: 5px;
+  padding-left: 5px;
+} */
