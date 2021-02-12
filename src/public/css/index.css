@@ -4,6 +4,7 @@
   --color-primary: #d1b5d0;
   --color-primary-dark: #9371be;
   --color-text-primary: rgba(0, 0, 0, 0.87);
+  --font-family-accent: "Yusei Magic";
   --spacing-small: .5rem;
   --spacing-medium: 1rem;
 }
@@ -36,6 +37,10 @@
   display: flex;
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
 .flex-grow-1 {
   flex-grow: 1;
 }
@@ -56,11 +61,21 @@
   justify-content: space-between;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 /* Float */
 
 .float-left {
   float: left;
 }
+
+/* Font Family */
+.font-family-accent {
+  font-family: var(--font-family-accent, sans-serif);
+}
+
 
 /* Font Size */
 
@@ -79,6 +94,12 @@
 .margin-horizontal-medium {
   margin-left: var(--spacing-medium);
   margin-right: var(--spacing-medium);
+}
+
+/* Nav */
+
+.nav-link:first-child {
+  margin-left: var(--spacing-medium);
 }
 
 /* Overflow */
@@ -117,41 +138,16 @@
   text-align: center;
 }
 
+.text-justify {
+  text-align: justify;
+}
+
 /* Text Decoration */
 
 .text-decoration-none {
   text-decoration: none;
 }
 
-.header__item {
-  float: left;
-  padding: 20px 8px;
-  text-decoration: none;
-  font-size: 20px;
-  text-align: center;
-  font-family: "Yusei Magic", sans-serif;
-  color: #d1b5d0;
-}
-
-.title {
-  font-family: "Yusei Magic", sans-serif;
-}
-.title__bigger {
-  color: 
-}
-
-.title__smaller {
-  color: #d1b5d0;
-}
-
-.title__books {
-  text-align: center;
-}
-
-.text {
-  text-align: justify;
-  text-justify: inter-word;
-}
 
 .img__center {
   display: block;

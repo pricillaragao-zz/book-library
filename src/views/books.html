@@ -1,18 +1,20 @@
+{% import "titles.html" as titles %}
+
 {% extends "layout.html" %} {% block content %}
 
-<h2 class="title title__bigger">My Favorite Books</h2>
+{{ titles.mainTitle('My favorite books') }}
 {% for book in books %}
-<div>
-  <img class="img__center" src="{{ book.coverUrl }}" /> <br />
+<div class="flex flex-column itens-center justify-center gap-small">
+  <img src="{{ book.coverUrl }}" /> <br />
   <a
-    class="title title__smaller title__books"
+    class="color-primary font-family-accent"
     target="_blank"
     href="{{
     book.bookUrl
     }}"
     >{{ book.title }}</a
   >
-  <p class="text" href="{{ book.review }}">{{ book.review }}</p>
+  <p class="text-justify" href="{{ book.review }}">{{ book.review }}</p>
   <br />
 </div>
 

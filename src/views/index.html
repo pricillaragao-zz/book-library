@@ -1,11 +1,13 @@
+{% import "titles.html" as titles %}
+
 {% extends "layout.html" %} {% block content %}
 
-<h2 class="title title__bigger">Welcome to my Library!</h2>
+{{ titles.mainTitle('Welcome to my Library') }}
 
 <div>
-  <h3 class="title title__smaller">What will you find here?</h3>
+  {{ titles.sectionTitle('What will you find here?') }}
 
-  <p class="text">
+  <p class="text-justify">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor dolor
     vel sem finibus lobortis. Curabitur gravida, purus sed suscipit viverra, est
     tortor pellentesque lacus, id consequat lectus nisi ac purus. Donec a orci a
@@ -17,9 +19,9 @@
     ac turpis egestas.
   </p>
 
-  <h3 class="title title__smaller">Who am I?</h3>
+  {{ titles.sectionTitle('Who am I?') }}
 
-  <p class="text">
+  <p class="text-justify">
     Nunc vitae semper quam. Aliquam ac tempus enim, sed pulvinar lacus. Mauris
     orci justo, vehicula quis leo eget, venenatis dapibus arcu. Nulla ornare
     tellus justo, eget pulvinar purus sagittis sit amet. Cras felis libero,
