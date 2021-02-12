@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ title }}</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
     <link rel="stylesheet" href="/css/index.css" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -16,13 +19,13 @@
     />
   </head>
   <body class="color-background color-text-primary">
-    {% include "./header.html" %} 
-    
+    {% include "./header.njk" %}
+
     <main class="margin-horizontal-medium">
-    {% block content %} 
-    {% endblock %}
+      {% block content %} 
+      {% endblock %}
     </main>
 
-    {% block exemple %} {% endblock %} {% include "./footer.html" %}
+    {% include "./footer.njk" %}
   </body>
 </html>

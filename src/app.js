@@ -23,11 +23,7 @@ nunjucks.configure(path.join(__dirname, "views"), {
 app.use("/books", booksRouter);
 
 app.get("/", (req, res) => {
-  res.render("index.html", { lang: "en", title: "Pricilla's Library - Home" });
-});
-
-app.get("/exemplo", (req, res) => {
-  res.render("exemplo.html");
+  res.render("index.njk", { lang: "en", title: "Pricilla's Library - Home" });
 });
 
 app.use((error, req, res, next) => {

@@ -1,0 +1,7 @@
+{% import "nav-link.njk" as navLink %}
+
+<nav class="color-background-accent flex gap-medium items-center h3">
+  {{ navLink.navLink('/', 'Home') }} 
+  {{ navLink.navLink('/books/rent', 'Books')}} 
+  {{ navLink.navLink('/exemplo', 'Contact')}}
+</nav>

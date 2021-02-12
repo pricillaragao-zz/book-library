@@ -5,7 +5,7 @@
   --color-primary-dark: #9371be;
   --color-text-primary: rgba(0, 0, 0, 0.87);
   --font-family-accent: "Yusei Magic";
-  --spacing-small: .5rem;
+  --spacing-small: 0.5rem;
   --spacing-medium: 1rem;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .gap-medium {
-  gap: var(--spacing-medium)
+  gap: var(--spacing-medium);
 }
 
 .items-center {
@@ -75,7 +75,6 @@
 .font-family-accent {
   font-family: var(--font-family-accent, sans-serif);
 }
-
 
 /* Font Size */
 
@@ -148,14 +147,28 @@
   text-decoration: none;
 }
 
+@media (min-width: 700px) {
+  /* Flex */
+  .flex-basis-25-m {
+    flex-basis: 25%;
+  }
 
-.img__center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-  /* width: 10; 
-  height: 15; */
+  .flex-grow-0-m {
+    flex-grow: 0;
+  }
+
+  .flex-row-m {
+    flex-direction: row;
+  }
+
+  .flex-shrink-0-m {
+    flex-shrink: 0;
+  }
+
+  /* Width */
+  .width-100-m {
+    width: 100%;
+  }
 }
 
 /* 
