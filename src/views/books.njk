@@ -6,24 +6,26 @@
 
 {{ titles.mainTitle('My favorite books') }} 
 
-{% for book in books %}
-  <div class="flex flex-column itens-center justify-center gap-small flex-row-m">
-    <div class="flex-basis-25-m flex-grow-0-m flex-shrink-0-m">
-      <img class="width-100-m" src="{{ book.coverUrl }}" />
-    </div>
+<div class="flex flex-column gap-medium-m">
+  {% for book in books %}
+    <div class="flex flex-column itens-center justify-center gap-small gap-medium-m flex-row-m">
+      <div class="flex-basis-25-m flex-grow-0-m flex-shrink-0-m">
+        <img class="width-100-m width-100-s center-image border-solid-m color-image-frame-m" src="{{ book.coverUrl }}" />
+      </div>
 
-    <div>
-      <a
-        class="color-primary font-family-accent"
-        target="_blank"
-        href="{{
-      book.bookUrl
-      }}"
-        >{{ book.title }}</a
-      >
-      <p class="text-justify" href="{{ book.review }}">{{ book.review }}</p>
+      <div>
+        <a
+          class="color-primary font-family-accent"
+          target="_blank"
+          href="{{
+        book.bookUrl
+        }}"
+          >{{ book.title }}</a
+        >
+        <p class="text-justify" href="{{ book.review }}">{{ book.review }}</p>
+      </div>
     </div>
-  </div>
-{% endfor %} 
+  {% endfor %} 
+</div>
 
 {% endblock %}
