@@ -18,14 +18,18 @@
       rel="stylesheet"
     />
   </head>
-  <body class="color-background color-text-primary">
-    {% include "./header.njk" %}
+  <body class="color-background color-text-primary grid-body">
+    <header class="header">
+      {% include "./navigation.njk" %} 
+    </header>
 
-    <main class="margin-horizontal-medium">
+    <main class="main">
       {% block content %} 
       {% endblock %}
     </main>
 
-    {% include "./footer.njk" %}
+    <footer class="footer">
+      <p>Copyright (c) 2021. Pricilla Patricia de Aragao</p>
+    </footer>
   </body>
 </html>

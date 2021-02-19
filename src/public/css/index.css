@@ -87,6 +87,28 @@
   font-size: 1.25rem;
 }
 
+/* Grid */
+
+.grid-body {
+  display: grid;
+  grid-template:
+    "header header header" auto
+    ". main ." auto
+    ". footer ." auto / 1rem auto 1rem;
+}
+
+.header {
+  grid-area: header;
+}
+
+.main {
+  grid-area: main;
+}
+
+.footer {
+  grid-area: footer;
+}
+
 /* Height */
 
 .h3 {
