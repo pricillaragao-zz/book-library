@@ -174,11 +174,10 @@
   text-decoration: none;
 }
 
-@media (min-width: 360px) {
-  /* Width */
-  .width-100-s {
-    width: 100%;
-  }
+/* Width */
+
+.width-100 {
+  width: 100%;
 }
 
 @media (min-width: 700px) {
