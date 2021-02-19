@@ -229,10 +229,20 @@
 }
 
 @media (min-width: 1000px) {
-  /* Width */
-  .width-75-l {
-    width: 50%;
-    border:rgba(0, 0, 0, 0.87);
+  /* Grid */
+  .grid-body-l {
+    display: grid;
+    grid-template:
+      "header header header" auto
+      ". main ." auto
+      ". footer ." auto / 2rem auto 2rem;
+  }
+
+  .grid-main-content-l {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    column-gap: 4rem;
   }
 }
 
@@ -243,8 +253,3 @@
 #ff9a77 laranja
 #ffc765 laranja claro ou amarelo escuro 
 #f9f871 amarelo  */
-
-/* .pd-1 {
-  padding-right: 5px;
-  padding-left: 5px;
-} */
