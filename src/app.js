@@ -23,7 +23,15 @@ nunjucks.configure(path.join(__dirname, "views"), {
 app.use("/books", booksRouter);
 
 app.get("/", (req, res) => {
-  res.render("index.njk", { lang: "en", title: "Pricilla's Library - Home" });
+  res.render("index.njk", { lang: "en", title: "Hi, I'm Pricilla! :)" });
+});
+
+app.get("/programming", (req, res) => {
+  res.render("programming.njk", { lang: "en", title: "My Programming Studies 8)" });
+});
+
+app.get("/crochet", (req, res) => {
+  res.render("crochet.njk", { lang: "en", title: "Amigurumi and Crochet" });
 });
 
 app.use((error, req, res, next) => {

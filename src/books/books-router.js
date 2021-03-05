@@ -8,7 +8,7 @@ router.get("/rent", async (req, res, next) => {
     const books = await booksService.listBooks();
     res.render("books.njk", {
       lang: "en",
-      title: "Pricilla's Library - Rent a Book",
+      title: "Pricilla's Readings <3",
       books,
     });
   } catch (err) {
